@@ -1,9 +1,23 @@
 {
-  "machine learning": [
-    "machine learning",
-    "ml"
+  "python": ["python", "python programming"],
+  "java": ["java", "core java"],
+  "c programming": ["c programming", "c language"],
+  "cpp": ["c plus plus", "cpp", "c++"],
+
+  "data structures": [
+    "data structures",
+    "data structures and algorithms",
+    "dsa"
+  ],
+  "algorithms": ["algorithms", "algorithm design"],
+  "object oriented programming": [
+    "object oriented programming",
+    "object oriented design",
+    "oop",
+    "oops"
   ],
 
+  "machine learning": ["machine learning", "ml"],
   "deep learning": [
     "deep learning",
     "neural networks",
@@ -11,37 +25,24 @@
     "rnn",
     "lstm"
   ],
+  "artificial intelligence": ["artificial intelligence", "ai"],
+  "natural language processing": [
+    "natural language processing",
+    "nlp"
+  ],
+  "computer vision": ["computer vision", "image processing"],
 
-  "artificial intelligence": [
-    "artificial intelligence",
-    "ai"
+  "data science": [
+    "data science",
+    "data analytics",
+    "data analysis"
   ],
 
-  "python": [
-    "python",
-    "python programming"
-  ],
-
-  "java": [
-    "java",
-    "core java"
-  ],
-
-  "c programming": [
-    "c programming",
-    "c language"
-  ],
-
-  "data structures": [
-    "data structures",
-    "dsa",
-    "data structures and algorithms"
-  ],
-
-  "sql": [
-    "sql",
-    "mysql",
-    "postgresql"
+  "sql": ["sql", "mysql", "postgresql", "sqlite"],
+  "nosql": ["nosql", "mongodb"],
+  "database management systems": [
+    "database management systems",
+    "dbms"
   ],
 
   "cloud computing": [
@@ -52,30 +53,50 @@
     "google cloud"
   ],
 
-  "react": [
-    "react",
-    "reactjs",
-    "react js"
+  "docker": ["docker", "containerization"],
+  "kubernetes": ["kubernetes", "container orchestration"],
+  "devops": [
+    "devops",
+    "ci cd",
+    "continuous integration",
+    "continuous deployment"
   ],
 
-  "javascript": [
-    "javascript"
-  ],
+  "git": ["git", "version control", "github"],
+  "linux": ["linux", "unix"],
 
-  "docker": [
-    "docker",
-    "containerization"
-  ],
+  "html": ["html", "html5"],
+  "css": ["css", "css3"],
+  "javascript": ["javascript"],
+  "react": ["react", "reactjs", "react js"],
+  "nodejs": ["nodejs", "node js"],
+  "expressjs": ["express", "expressjs"],
+  "django": ["django"],
+  "flask": ["flask"],
 
   "computer networks": [
     "computer networks",
     "networking",
     "tcp ip"
   ],
-
   "operating systems": [
     "operating systems",
     "process management",
     "memory management"
+  ],
+
+  "software testing": ["software testing", "manual testing"],
+  "automation testing": ["automation testing", "selenium"],
+
+  "big data": ["big data", "hadoop", "spark"],
+  "data visualization": ["data visualization", "tableau", "power bi"],
+
+  "api development": ["api development", "rest api", "restful services"],
+  "microservices": ["microservices", "microservice architecture"],
+
+  "cyber security": [
+    "cyber security",
+    "cybersecurity",
+    "network security"
   ]
 }
