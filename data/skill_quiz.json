@@ -1,0 +1,180 @@
+{
+  "python": {
+    "easy": [
+      {
+        "q": "Which keyword defines a function?",
+        "options": ["func", "def", "function", "define"],
+        "ans": "def"
+      }
+    ],
+    "medium": [
+      {
+        "q": "Which data type is immutable?",
+        "options": ["list", "set", "dict", "tuple"],
+        "ans": "tuple"
+      }
+    ],
+    "advanced": [
+      {
+        "q": "What is GIL in Python?",
+        "options": [
+          "Garbage Index List",
+          "Global Interpreter Lock",
+          "Global Internal Loop",
+          "General Input Layer"
+        ],
+        "ans": "Global Interpreter Lock"
+      }
+    ]
+  },
+
+  "java": {
+    "easy": [
+      {
+        "q": "Keyword for inheritance?",
+        "options": ["this", "extends", "super", "final"],
+        "ans": "extends"
+      }
+    ],
+    "medium": [
+      {
+        "q": "Which collection allows duplicates?",
+        "options": ["Set", "Map", "List", "TreeSet"],
+        "ans": "List"
+      }
+    ],
+    "advanced": [
+      {
+        "q": "What is JVM responsible for?",
+        "options": [
+          "Compilation",
+          "Memory management",
+          "Garbage collection",
+          "All of these"
+        ],
+        "ans": "All of these"
+      }
+    ]
+  },
+
+  "machine learning": {
+    "easy": [
+      {
+        "q": "Which is supervised learning?",
+        "options": ["KNN", "K-Means", "PCA", "Apriori"],
+        "ans": "KNN"
+      }
+    ],
+    "medium": [
+      {
+        "q": "Which metric measures classification accuracy?",
+        "options": ["MSE", "Precision", "Recall", "F1"],
+        "ans": "F1"
+      }
+    ],
+    "advanced": [
+      {
+        "q": "What does regularization prevent?",
+        "options": [
+          "Underfitting",
+          "Overfitting",
+          "Bias",
+          "Noise"
+        ],
+        "ans": "Overfitting"
+      }
+    ]
+  },
+
+  "sql": {
+    "easy": [
+      {
+        "q": "Command to get data?",
+        "options": ["SELECT", "GET", "FETCH", "SHOW"],
+        "ans": "SELECT"
+      }
+    ],
+    "medium": [
+      {
+        "q": "Which is not a JOIN?",
+        "options": ["INNER", "OUTER", "SIDE", "LEFT"],
+        "ans": "SIDE"
+      }
+    ],
+    "advanced": [
+      {
+        "q": "What is normalization?",
+        "options": [
+          "Indexing",
+          "Removing redundancy",
+          "Sorting",
+          "Hashing"
+        ],
+        "ans": "Removing redundancy"
+      }
+    ]
+  },
+
+  "html": {
+    "easy": [
+      {
+        "q": "Tag for link?",
+        "options": ["<a>", "<p>", "<div>", "<span>"],
+        "ans": "<a>"
+      }
+    ],
+    "medium": [
+      {
+        "q": "Which tag is semantic?",
+        "options": ["<div>", "<span>", "<article>", "<b>"],
+        "ans": "<article>"
+      }
+    ],
+    "advanced": [
+      {
+        "q": "What does ARIA improve?",
+        "options": [
+          "SEO",
+          "Accessibility",
+          "Speed",
+          "Security"
+        ],
+        "ans": "Accessibility"
+      }
+    ]
+  },
+
+  "devops": {
+    "easy": [
+      {
+        "q": "Tool for CI/CD?",
+        "options": ["Docker", "Jenkins", "Git", "Linux"],
+        "ans": "Jenkins"
+      }
+    ],
+    "medium": [
+      {
+        "q": "What is containerization?",
+        "options": [
+          "VM creation",
+          "App isolation",
+          "Cloud hosting",
+          "Encryption"
+        ],
+        "ans": "App isolation"
+      }
+    ],
+    "advanced": [
+      {
+        "q": "What is Kubernetes used for?",
+        "options": [
+          "Testing",
+          "Orchestration",
+          "Monitoring",
+          "Security"
+        ],
+        "ans": "Orchestration"
+      }
+    ]
+  }
+}

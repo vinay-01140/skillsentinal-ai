@@ -1,0 +1,11 @@
+{
+  "c programming": ["embedded systems", "iot", "python"],
+  "cpp": ["modern c++", "game development", "rust"],
+  "automation testing": ["selenium", "cypress", "playwright"],
+  "software testing": ["automation testing", "qa engineering"],
+  "api development": ["fastapi", "graphql", "microservices"],
+
+  "java": ["spring boot", "kotlin"],
+  "python": ["data science", "machine learning"],
+  "html": ["react", "frontend frameworks"]
+}

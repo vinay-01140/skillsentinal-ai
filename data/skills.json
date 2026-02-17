@@ -1,0 +1,117 @@
+{
+  "python": ["python", "python programming"],
+  "java": ["java", "core java"],
+  "c programming": ["c programming", "c language"],
+  "cpp": ["c plus plus", "cpp", "c++"],
+
+  "data structures": [
+    "data structures",
+    "data structures and algorithms",
+    "dsa"
+  ],
+  "algorithms": ["algorithms", "algorithm design"],
+  "object oriented programming": [
+    "object oriented programming",
+    "object oriented design",
+    "oop",
+    "oops"
+  ],
+
+  "machine learning": ["machine learning", "ml"],
+  "deep learning": [
+    "deep learning",
+    "neural networks",
+    "cnn",
+    "rnn",
+    "lstm"
+  ],
+  "artificial intelligence": ["artificial intelligence", "ai"],
+  "natural language processing": [
+    "natural language processing",
+    "nlp"
+  ],
+  "computer vision": ["computer vision", "image processing"],
+
+  "data science": [
+    "data science",
+    "data analytics",
+    "data analysis"
+  ],
+
+  "sql": ["sql", "mysql", "postgresql", "sqlite"],
+  "nosql": ["nosql", "mongodb"],
+  "database management systems": [
+    "database management systems",
+    "dbms"
+  ],
+
+  "cloud computing": [
+    "cloud computing",
+    "aws",
+    "amazon web services",
+    "azure",
+    "google cloud",
+    "gcp"
+  ],
+
+  "docker": ["docker", "containerization"],
+  "kubernetes": ["kubernetes", "container orchestration"],
+  "devops": [
+    "devops",
+    "ci cd",
+    "ci/cd",
+    "continuous integration",
+    "continuous deployment"
+  ],
+
+  "git": ["git", "version control", "github", "gitlab"],
+  "linux": ["linux", "unix"],
+
+  "html": ["html", "html5"],
+  "css": ["css", "css3"],
+  "javascript": ["javascript", "js", "java script"],
+  "react": ["react", "reactjs", "react js"],
+  "nodejs": ["nodejs", "node js"],
+  "expressjs": ["express", "expressjs"],
+  "django": ["django"],
+  "flask": ["flask"],
+
+  "computer networks": [
+    "computer networks",
+    "networking",
+    "tcp ip",
+    "tcp/ip"
+  ],
+  "operating systems": [
+    "operating systems",
+    "os",
+    "process management",
+    "memory management"
+  ],
+
+  "software testing": ["software testing", "manual testing"],
+  "automation testing": ["automation testing", "selenium"],
+
+  "big data": ["big data", "hadoop", "spark"],
+  "data visualization": ["data visualization", "tableau", "power bi"],
+
+  "api development": ["api development", "rest api", "restful services"],
+  "microservices": ["microservices", "microservice architecture"],
+
+  "cyber security": [
+    "cyber security",
+    "cybersecurity",
+    "network security"
+  ],
+
+  "communication skills": [
+    "communication",
+    "communication skills",
+    "verbal communication",
+    "written communication"
+  ],
+  "teamwork": ["teamwork", "team player", "collaboration"],
+  "problem solving": ["problem solving", "problem-solving"],
+  "analytical skills": ["analytical skills", "analysis skills"],
+  "leadership": ["leadership", "team leadership"]
+}

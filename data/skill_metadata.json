@@ -1,0 +1,60 @@
+{
+  "python": 1991,
+  "java": 1995,
+  "c programming": 1972,
+  "cpp": 1985,
+
+  "data structures": 1970,
+  "algorithms": 1960,
+  "object oriented programming": 1980,
+
+  "machine learning": 2000,
+  "deep learning": 2012,
+  "artificial intelligence": 1956,
+  "natural language processing": 1960,
+  "computer vision": 1966,
+
+  "data science": 2008,
+
+  "sql": 1974,
+  "nosql": 2009,
+  "database management systems": 1970,
+
+  "cloud computing": 2006,
+
+  "docker": 2013,
+  "kubernetes": 2014,
+  "devops": 2009,
+
+  "git": 2005,
+  "linux": 1991,
+
+  "html": 1993,
+  "css": 1996,
+  "javascript": 1995,
+  "react": 2013,
+  "nodejs": 2009,
+  "expressjs": 2010,
+  "django": 2005,
+  "flask": 2010,
+
+  "computer networks": 1969,
+  "operating systems": 1950,
+
+  "software testing": 1970,
+  "automation testing": 2004,
+
+  "big data": 2005,
+  "data visualization": 2003,
+
+  "api development": 2000,
+  "microservices": 2011,
+
+  "cyber security": 1990,
+
+  "communication skills": 1900,
+  "teamwork": 1900,
+  "problem solving": 1900,
+  "analytical skills": 1900,
+  "leadership": 1900
+}
