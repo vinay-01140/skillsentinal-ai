@@ -64,25 +64,25 @@ Streamlit Dashboard
 SKILLSENTINEL-AI/
 │
 ├── data/
-│   ├── job_market/          # Raw datasets (excluded from repo if large)
-│   ├── resumes/             # Resume PDFs
-│   ├── skill_quiz.json
-│   ├── skill_metadata.json
-│   └── user_experience.json
+│ ├── job_market/ # Raw datasets (excluded if large)
+│ ├── resumes/ # Resume PDFs
+│ ├── skill_quiz.json
+│ ├── skill_metadata.json
+│ └── user_experience.json
 │
 ├── reports/
-│   ├── skill_risk_scores.csv
-│   └── skill_demand_trends.png
+│ ├── skill_risk_scores.csv
+│ └── skill_demand_trends.png
 │
 ├── src/
-│   ├── app.py
-│   ├── parser.py
-│   ├── skill_extractor.py
-│   ├── trend_analysis.py
-│   ├── risk_engine.py
-│   ├── sbert_recommender.py
-│   ├── recommender.py
-│   └── verifier.py
+│ ├── app.py
+│ ├── parser.py
+│ ├── skill_extractor.py
+│ ├── trend_analysis.py
+│ ├── risk_engine.py
+│ ├── sbert_recommender.py
+│ ├── recommender.py
+│ └── verifier.py
 │
 ├── requirements.txt
 └── README.md
