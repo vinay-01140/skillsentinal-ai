@@ -1,0 +1,45 @@
+skill,trend,risk_score
+algorithms,Increasing,26.0
+analytical skills,Increasing,26.0
+api development,Volatile,51.0
+artificial intelligence,Increasing,26.0
+automation testing,Declining,61.0
+big data,Increasing,26.0
+c programming,Declining,61.0
+cloud computing,Increasing,26.0
+communication skills,Increasing,26.0
+computer networks,Increasing,26.0
+computer vision,Increasing,26.0
+cpp,Declining,61.0
+css,Increasing,26.0
+cyber security,Increasing,26.0
+data science,Increasing,20.0
+data structures,Increasing,26.0
+data visualization,Increasing,26.0
+database management systems,Stable,36.0
+deep learning,Increasing,20.0
+devops,Increasing,20.0
+django,Increasing,26.0
+docker,Increasing,20.0
+expressjs,Increasing,20.0
+flask,Increasing,20.0
+git,Increasing,26.0
+html,Stable,36.0
+java,Increasing,22.0
+javascript,Increasing,26.0
+kubernetes,Increasing,20.0
+leadership,Increasing,26.0
+linux,Increasing,26.0
+machine learning,Increasing,24.0
+microservices,Increasing,20.0
+natural language processing,Increasing,26.0
+nodejs,Increasing,20.0
+nosql,Stable,30.0
+object oriented programming,Stable,36.0
+operating systems,Stable,36.0
+problem solving,Increasing,26.0
+python,Increasing,24.0
+react,Increasing,20.0
+software testing,Declining,61.0
+sql,Increasing,26.0
+teamwork,Increasing,26.0
