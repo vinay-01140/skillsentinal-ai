@@ -8,6 +8,7 @@ from sentence_transformers import SentenceTransformer, util
 
 from src.parser import parse_resume
 from src.skill_extractor import extract_skills, load_skill_dictionary
+
 # -------------------------------
 # Session Initialization
 # -------------------------------
@@ -21,12 +22,9 @@ if "resume_path" not in st.session_state:
 if "user_skills" not in st.session_state:
     st.session_state.user_skills = []
 
-
 # ------------------------------------------------
 # CONFIG
 # ------------------------------------------------
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(
     page_title="SkillSentinel",
@@ -34,31 +32,10 @@ st.set_page_config(
     layout="wide"
 )
 
-
 # ------------------------------------------------
 # LOAD DATA
 # ------------------------------------------------
-'''
-skills_dict = load_skill_dictionary()
 
-risk_df = pd.read_csv(
-    os.path.join(BASE_DIR, "reports", "skill_risk_scores.csv")
-)
-
-trend_df = pd.read_csv(
-    os.path.join(BASE_DIR, "data/job_market/skill_trend_comparison.csv")
-)
-
-
-# Quiz data
-quiz_path = os.path.join(BASE_DIR, "data", "skill_quiz.json")
-
-if os.path.exists(quiz_path):
-    with open(quiz_path, "r") as f:
-        quiz_data = json.load(f)
-else:
-    quiz_data = {}
-'''
 skills_dict = load_skill_dictionary()
 
 # Load processed risk results (deployment-safe)
@@ -72,6 +49,7 @@ if os.path.exists(quiz_path):
         quiz_data = json.load(f)
 else:
     quiz_data = {}
+
 # ------------------------------------------------
 # LOAD SBERT
 # ------------------------------------------------
@@ -79,7 +57,6 @@ else:
 @st.cache_resource
 def load_model():
     return SentenceTransformer("all-MiniLM-L6-v2")
-
 
 model = load_model()
 
@@ -90,17 +67,12 @@ skill_embeddings = model.encode(
     convert_to_tensor=True
 )
 
-
 # ------------------------------------------------
 # SESSION STATE
 # ------------------------------------------------
 
-if "user_skills" not in st.session_state:
-    st.session_state.user_skills = []
-
 if "verified" not in st.session_state:
     st.session_state.verified = {}
-
 
 # ------------------------------------------------
 # SIDEBAR
@@ -112,7 +84,6 @@ page = st.sidebar.radio(
     "Navigation",
     ["Dashboard", "Verification", "Report", "About"]
 )
-
 
 # ------------------------------------------------
 # HEADER
@@ -130,13 +101,11 @@ st.markdown(
 
 st.divider()
 
-
 # ------------------------------------------------
 # HELPER: COLOR RISK
 # ------------------------------------------------
 
 def color_risk(val):
-
     if val >= 60:
         return "background-color:#ff7675;color:white"
     elif val >= 30:
@@ -144,55 +113,21 @@ def color_risk(val):
     else:
         return "background-color:#55efc4"
 
-
 # =========================================================
 # DASHBOARD
 # =========================================================
-
-# ===============================
-# DASHBOARD PAGE
-# ===============================
-
-# ===============================
-# DASHBOARD PAGE
-# ===============================
 
 if page == "Dashboard":
 
     import time
     import numpy as np
-    import pandas as pd
     import plotly.express as px
-
-    from src.parser import parse_resume
-    from src.skill_extractor import extract_skills, load_skill_dictionary
-
-
-    # -------------------------------
-    # Session Safe Initialization
-    # -------------------------------
-
-    if "resume_uploaded" not in st.session_state:
-        st.session_state.resume_uploaded = False
-
-    if "user_skills" not in st.session_state:
-        st.session_state.user_skills = []
 
     user_skills = st.session_state.get("user_skills", [])
 
-
-    # -------------------------------
-    # Page Header
-    # -------------------------------
-
     st.title("🧠 SkillSentinel – AI Career Risk Analyzer")
-
-    st.markdown(
-        "Analyze your resume, evaluate skill risks, and get AI-powered guidance."
-    )
-
+    st.markdown("Analyze your resume, evaluate skill risks, and get AI-powered guidance.")
     st.markdown("---")
-
 
     # -------------------------------
     # Resume Upload
@@ -203,11 +138,9 @@ if page == "Dashboard":
         type=["pdf"]
     )
 
-
     if uploaded_file and not st.session_state.resume_uploaded:
 
         with st.spinner("🔍 AI is analyzing your resume..."):
-
             time.sleep(2)
 
             file_path = "data/resumes/temp_resume.pdf"
@@ -215,78 +148,46 @@ if page == "Dashboard":
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.read())
 
-
-            # Parse Resume
             resume_text = parse_resume(file_path)
 
-            skill_dict = load_skill_dictionary("data/skills.json")
+            skill_map = extract_skills(resume_text, skills_dict)
 
-            skill_map = extract_skills(resume_text, skill_dict)
+            extracted = [s for s, v in skill_map.items() if v]
 
-            extracted = [
-                s for s, v in skill_map.items() if v
-            ]
-
-
-            # Save to Session
             st.session_state.resume_uploaded = True
             st.session_state.user_skills = extracted
-
             user_skills = extracted
-
 
         st.success("✅ Resume analyzed successfully!")
 
-
     elif st.session_state.resume_uploaded:
-
         st.success("✅ Resume already analyzed")
 
-
     else:
-
         st.info("📄 Please upload your resume to start analysis")
         st.stop()
-
 
     # -------------------------------
     # Reset Option
     # -------------------------------
 
     if st.button("🔄 Upload New Resume"):
-
         st.session_state.resume_uploaded = False
         st.session_state.user_skills = []
-
         st.experimental_rerun()
-
 
     st.markdown("---")
 
-
     # -------------------------------
-    # Load Data
+    # Load Processed Risk Data
     # -------------------------------
-
-    risk_df = pd.read_csv("reports/skill_risk_scores.csv")
-
-#    trend_df = pd.read_csv(
- #       "data/job_market/skill_trend_comparison.csv"
-  #  )
-#
- #   trend_time_df = pd.read_csv(
-  #      "data/job_market/skill_demand_by_month_final.csv"
-   # )
 
     user_data = risk_df[
         risk_df["skill"].isin(user_skills)
     ]
 
-
     trends = user_data["trend"].tolist()
     risk_scores = user_data["risk_score"].tolist()
-
-
     # -------------------------------
     # KPI CARDS
     # -------------------------------
