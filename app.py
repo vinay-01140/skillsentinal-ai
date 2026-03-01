@@ -265,7 +265,6 @@ if page == "Dashboard":
  #   trend_time_df = pd.read_csv(
   #      "data/job_market/skill_demand_by_month_final.csv"
    # )
-    risk_df = pd.read_csv("reports/skill_risk_scores.csv")
 
     user_data = risk_df[
         risk_df["skill"].isin(user_skills)
