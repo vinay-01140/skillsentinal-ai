@@ -338,121 +338,110 @@ if page == "Dashboard":
 
     st.markdown("---")
 
-# -------------------------------
-# Market Demand Timeline
-# -------------------------------
+    st.markdown("---")
 
-st.markdown("## 📈 Market Demand Timeline")
+    # -------------------------------
+    # Market Demand Timeline
+    # -------------------------------
 
-st.caption(
-    "Job demand trend based on LinkedIn postings (2023–2024)"
-)
+    st.markdown("## 📈 Market Demand Timeline")
+    st.caption("Job demand trend based on LinkedIn postings (2023–2024)")
 
-if user_skills:
+    if user_skills:
 
-    selected_skill = st.selectbox(
-        "Select Skill to Analyze",
-        user_skills
-    )
-
-    if selected_skill in trend_data:
-
-        skill_series = trend_data[selected_skill]
-
-        trend_df_plot = pd.DataFrame(
-            {
-                "Month": list(skill_series.keys()),
-                "Job Demand": list(skill_series.values())
-            }
+        selected_skill = st.selectbox(
+            "Select Skill to Analyze",
+            user_skills
         )
 
-        trend_df_plot["Month"] = pd.to_datetime(trend_df_plot["Month"])
-        trend_df_plot = trend_df_plot.sort_values("Month")
+        if selected_skill in trend_data:
 
-        st.line_chart(
-            trend_df_plot.set_index("Month"),
-            height=350
-        )
+            skill_series = trend_data[selected_skill]
 
-        start = trend_df_plot["Job Demand"].iloc[0]
-        end = trend_df_plot["Job Demand"].iloc[-1]
+            trend_df_plot = pd.DataFrame(
+                {
+                    "Month": list(skill_series.keys()),
+                    "Job Demand": list(skill_series.values())
+                }
+            )
 
-        change = round(((end - start) / start) * 100, 2)
+            trend_df_plot["Month"] = pd.to_datetime(trend_df_plot["Month"])
+            trend_df_plot = trend_df_plot.sort_values("Month")
 
-        if change > 10:
-            st.success(f"📈 Demand increased by {change}%")
-        elif change < -10:
-            st.error(f"📉 Demand decreased by {change}%")
+            st.line_chart(
+                trend_df_plot.set_index("Month"),
+                height=350
+            )
+
+            start = trend_df_plot["Job Demand"].iloc[0]
+            end = trend_df_plot["Job Demand"].iloc[-1]
+
+            change = round(((end - start) / start) * 100, 2)
+
+            if change > 10:
+                st.success(f"📈 Demand increased by {change}%")
+            elif change < -10:
+                st.error(f"📉 Demand decreased by {change}%")
+            else:
+                st.warning("⚖️ Demand is stable")
+
         else:
-            st.warning("⚖️ Demand is stable")
+            st.info("Trend data not available for this skill.")
+
+        # -------------------------------
+        # AI Explanation
+        # -------------------------------
+
+        with st.expander("🧠 AI Risk Explanation"):
+
+            row = user_data[
+                user_data["skill"] == selected_skill
+            ].iloc[0]
+
+            st.info(f"""
+            📌 Skill: {selected_skill}
+            📉 Trend: {row['trend']}
+            ⚠️ Risk Score: {row['risk_score']}%
+            📊 Based on historical job market data
+            """)
 
     else:
-        st.info("Trend data not available for this skill.")
+        st.info("No skills detected yet.")
 
-else:
-    st.info("No skills detected yet.")
-
-st.markdown("---")
+    st.markdown("---")
 
     # -------------------------------
-    # AI Explanation
+    # AI Recommendations
     # -------------------------------
 
-    with st.expander("🧠 AI Risk Explanation"):
+    st.markdown("## 🤖 AI Recommendations")
 
-        row = user_data[
-            user_data["skill"] == selected_skill
-        ].iloc[0]
-
-
-        st.info(f"""
-        📌 Skill: {selected_skill}
-
-        📉 Trend: {row['trend']}
-
-        ⚠️ Risk Score: {row['risk_score']}%
-
-        📊 Based on historical job market data
-        """)
-
-
-# -------------------------------
-# AI Recommendations
-# -------------------------------
-
-st.markdown("## 🤖 AI Recommendations")
-
-
-risky = user_data[
-    user_data["risk_score"] > 30
-].sort_values(
-    "risk_score",
-    ascending=False
-)
-for _, row in risky.iterrows():
-
-    st.markdown(
-        f"### 🔹 {row['skill']} ({row['risk_score']}%)"
+    risky = user_data[
+        user_data["risk_score"] > 30
+    ].sort_values(
+        "risk_score",
+        ascending=False
     )
 
+    for _, row in risky.iterrows():
 
-    rec_map = {
-        "html": ["CSS", "JavaScript", "NodeJS"],
-        "nosql": ["Big Data", "DBMS", "Data Structures"],
-        "api development": ["FastAPI", "GraphQL", "Microservices"]
-    }
+        st.markdown(
+            f"### 🔹 {row['skill']} ({row['risk_score']}%)"
+        )
 
+        rec_map = {
+            "html": ["CSS", "JavaScript", "NodeJS"],
+            "nosql": ["Big Data", "DBMS", "Data Structures"],
+            "api development": ["FastAPI", "GraphQL", "Microservices"]
+        }
 
-    recs = rec_map.get(
-        row["skill"],
-        ["AI", "Cloud", "DevOps"]
-    )
+        recs = rec_map.get(
+            row["skill"],
+            ["AI", "Cloud", "DevOps"]
+        )
 
-
-    st.write("➡ Learn:", ", ".join(recs))
-
-    st.caption("AI-powered semantic similarity engine")
-
+        st.write("➡ Learn:", ", ".join(recs))
+        st.caption("AI-powered semantic similarity engine")
 # =========================================================
 # VERIFICATION
 # =========================================================
