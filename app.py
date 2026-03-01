@@ -416,44 +416,42 @@ st.markdown("---")
         """)
 
 
-    # -------------------------------
-    # AI Recommendations
-    # -------------------------------
+# -------------------------------
+# AI Recommendations
+# -------------------------------
 
-    st.markdown("## 🤖 AI Recommendations")
+st.markdown("## 🤖 AI Recommendations")
 
 
-    risky = user_data[
-        user_data["risk_score"] > 30
-    ].sort_values(
-        "risk_score",
-        ascending=False
+risky = user_data[
+    user_data["risk_score"] > 30
+].sort_values(
+    "risk_score",
+    ascending=False
+)
+for _, row in risky.iterrows():
+
+    st.markdown(
+        f"### 🔹 {row['skill']} ({row['risk_score']}%)"
     )
 
 
-    for _, row in risky.iterrows():
-
-        st.markdown(
-            f"### 🔹 {row['skill']} ({row['risk_score']}%)"
-        )
-
-
-        rec_map = {
-            "html": ["CSS", "JavaScript", "NodeJS"],
-            "nosql": ["Big Data", "DBMS", "Data Structures"],
-            "api development": ["FastAPI", "GraphQL", "Microservices"]
-        }
+    rec_map = {
+        "html": ["CSS", "JavaScript", "NodeJS"],
+        "nosql": ["Big Data", "DBMS", "Data Structures"],
+        "api development": ["FastAPI", "GraphQL", "Microservices"]
+    }
 
 
-        recs = rec_map.get(
-            row["skill"],
-            ["AI", "Cloud", "DevOps"]
-        )
+    recs = rec_map.get(
+        row["skill"],
+        ["AI", "Cloud", "DevOps"]
+    )
 
 
-        st.write("➡ Learn:", ", ".join(recs))
+    st.write("➡ Learn:", ", ".join(recs))
 
-        st.caption("AI-powered semantic similarity engine")
+    st.caption("AI-powered semantic similarity engine")
 
 # =========================================================
 # VERIFICATION
