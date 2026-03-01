@@ -40,7 +40,14 @@ skills_dict = load_skill_dictionary()
 
 # Load processed risk results (deployment-safe)
 risk_df = pd.read_csv("reports/skill_risk_scores.csv")
+# Load compact trend JSON
+trend_json_path = os.path.join("data", "job_trends.json")
 
+if os.path.exists(trend_json_path):
+    with open(trend_json_path, "r") as f:
+        trend_data = json.load(f)
+else:
+    trend_data = {}
 # Quiz data
 quiz_path = os.path.join("data", "skill_quiz.json")
 
@@ -331,45 +338,46 @@ if page == "Dashboard":
 
     st.markdown("---")
 
+# -------------------------------
+# Market Demand Timeline
+# -------------------------------
 
-    # -------------------------------
-    # Market Demand Timeline
-    # -------------------------------
+st.markdown("## 📈 Market Demand Timeline")
 
-    st.markdown("## 📈 Market Demand Timeline")
+st.caption(
+    "Job demand trend based on LinkedIn postings (2023–2024)"
+)
 
-    st.caption(
-        "Job demand trend based on LinkedIn postings (2023–2024)"
-    )
-
+if user_skills:
 
     selected_skill = st.selectbox(
         "Select Skill to Analyze",
         user_skills
     )
 
+    if selected_skill in trend_data:
 
-    trend_row = trend_time_df[
-        trend_time_df["skill"] == selected_skill
-    ]
+        skill_series = trend_data[selected_skill]
 
+        trend_df_plot = pd.DataFrame(
+            {
+                "Month": list(skill_series.keys()),
+                "Job Demand": list(skill_series.values())
+            }
+        )
 
-    if not trend_row.empty:
+        trend_df_plot["Month"] = pd.to_datetime(trend_df_plot["Month"])
+        trend_df_plot = trend_df_plot.sort_values("Month")
 
-        ts = trend_row.drop("skill", axis=1).T
+        st.line_chart(
+            trend_df_plot.set_index("Month"),
+            height=350
+        )
 
-        ts.columns = ["Job Demand"]
-
-        ts.index = pd.to_datetime(ts.index)
-
-        st.line_chart(ts, height=350)
-
-
-        start = ts.iloc[0, 0]
-        end = ts.iloc[-1, 0]
+        start = trend_df_plot["Job Demand"].iloc[0]
+        end = trend_df_plot["Job Demand"].iloc[-1]
 
         change = round(((end - start) / start) * 100, 2)
-
 
         if change > 10:
             st.success(f"📈 Demand increased by {change}%")
@@ -378,9 +386,13 @@ if page == "Dashboard":
         else:
             st.warning("⚖️ Demand is stable")
 
+    else:
+        st.info("Trend data not available for this skill.")
 
-    st.markdown("---")
+else:
+    st.info("No skills detected yet.")
 
+st.markdown("---")
 
     # -------------------------------
     # AI Explanation
