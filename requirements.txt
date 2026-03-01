@@ -7,6 +7,7 @@ pytesseract>=0.3
 spacy>=3.8
 sentence-transformers>=5.0
 torch>=2.0
+plotly>=5.0
 transformers>=4.0
 scikit-learn>=1.5
 scipy>=1.10
