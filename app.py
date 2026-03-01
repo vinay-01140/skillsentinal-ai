@@ -38,7 +38,7 @@ st.set_page_config(
 # ------------------------------------------------
 # LOAD DATA
 # ------------------------------------------------
-
+'''
 skills_dict = load_skill_dictionary()
 
 risk_df = pd.read_csv(
@@ -58,8 +58,20 @@ if os.path.exists(quiz_path):
         quiz_data = json.load(f)
 else:
     quiz_data = {}
+'''
+skills_dict = load_skill_dictionary()
 
+# Load processed risk results (deployment-safe)
+risk_df = pd.read_csv("reports/skill_risk_scores.csv")
 
+# Quiz data
+quiz_path = os.path.join("data", "skill_quiz.json")
+
+if os.path.exists(quiz_path):
+    with open(quiz_path, "r") as f:
+        quiz_data = json.load(f)
+else:
+    quiz_data = {}
 # ------------------------------------------------
 # LOAD SBERT
 # ------------------------------------------------
