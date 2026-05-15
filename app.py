@@ -8,10 +8,7 @@ from sentence_transformers import SentenceTransformer, util
 
 from src.parser import parse_resume
 from src.skill_extractor import extract_skills, load_skill_dictionary
-
-# -------------------------------
 # Session Initialization
-# -------------------------------
 
 if "resume_uploaded" not in st.session_state:
     st.session_state.resume_uploaded = False
@@ -22,19 +19,13 @@ if "resume_path" not in st.session_state:
 if "user_skills" not in st.session_state:
     st.session_state.user_skills = []
 
-# ------------------------------------------------
-# CONFIG
-# ------------------------------------------------
-
 st.set_page_config(
     page_title="SkillSentinel",
     page_icon="🧠",
     layout="wide"
 )
 
-# ------------------------------------------------
 # LOAD DATA
-# ------------------------------------------------
 
 skills_dict = load_skill_dictionary()
 
@@ -56,10 +47,7 @@ if os.path.exists(quiz_path):
         quiz_data = json.load(f)
 else:
     quiz_data = {}
-
-# ------------------------------------------------
 # LOAD SBERT
-# ------------------------------------------------
 
 @st.cache_resource
 def load_model():
@@ -73,17 +61,9 @@ skill_embeddings = model.encode(
     all_skills,
     convert_to_tensor=True
 )
-
-# ------------------------------------------------
 # SESSION STATE
-# ------------------------------------------------
-
 if "verified" not in st.session_state:
     st.session_state.verified = {}
-
-# ------------------------------------------------
-# SIDEBAR
-# ------------------------------------------------
 
 st.sidebar.title("🧭 SkillSentinel")
 
@@ -91,10 +71,6 @@ page = st.sidebar.radio(
     "Navigation",
     ["Dashboard", "Verification", "Report", "About"]
 )
-
-# ------------------------------------------------
-# HEADER
-# ------------------------------------------------
 
 st.markdown(
     """
@@ -108,9 +84,7 @@ st.markdown(
 
 st.divider()
 
-# ------------------------------------------------
 # HELPER: COLOR RISK
-# ------------------------------------------------
 
 def color_risk(val):
     if val >= 60:
@@ -119,10 +93,6 @@ def color_risk(val):
         return "background-color:#ffeaa7"
     else:
         return "background-color:#55efc4"
-
-# =========================================================
-# DASHBOARD
-# =========================================================
 
 if page == "Dashboard":
 
@@ -135,10 +105,7 @@ if page == "Dashboard":
     st.title("🧠 SkillSentinel – AI Career Risk Analyzer")
     st.markdown("Analyze your resume, evaluate skill risks, and get AI-powered guidance.")
     st.markdown("---")
-
-    # -------------------------------
     # Resume Upload
-    # -------------------------------
 
     uploaded_file = st.file_uploader(
         "📂 Upload Resume (PDF)",
@@ -174,9 +141,6 @@ if page == "Dashboard":
         st.info("📄 Please upload your resume to start analysis")
         st.stop()
 
-    # -------------------------------
-    # Reset Option
-    # -------------------------------
 
     if st.button("🔄 Upload New Resume"):
         st.session_state.resume_uploaded = False
@@ -185,19 +149,12 @@ if page == "Dashboard":
 
     st.markdown("---")
 
-    # -------------------------------
-    # Load Processed Risk Data
-    # -------------------------------
-
     user_data = risk_df[
         risk_df["skill"].isin(user_skills)
     ]
 
     trends = user_data["trend"].tolist()
     risk_scores = user_data["risk_score"].tolist()
-    # -------------------------------
-    # KPI CARDS
-    # -------------------------------
 
     st.markdown("## 📊 Skill Overview")
 
@@ -222,11 +179,7 @@ if page == "Dashboard":
 
 
     st.markdown("---")
-
-
-    # -------------------------------
     # Top Risks
-    # -------------------------------
 
     st.markdown("## 🚨 Critical Skills")
 
@@ -245,10 +198,7 @@ if page == "Dashboard":
 
     st.markdown("---")
 
-
-    # -------------------------------
     # Skill Risk Table
-    # -------------------------------
 
     st.markdown("## ⚠️ Skill Risk Table")
 
@@ -273,12 +223,9 @@ if page == "Dashboard":
 
     st.markdown("---")
 
-
-    # -------------------------------
     # Risk Distribution (Donut)
-    # -------------------------------
 
-    st.markdown("## 🎯 Risk Distribution")
+    st.markdown(" 🎯 Risk Distribution")
 
 
     low = sum(r < 30 for r in risk_scores)
@@ -307,13 +254,7 @@ if page == "Dashboard":
 
     st.plotly_chart(fig, use_container_width=True)
 
-
     st.markdown("---")
-
-
-    # -------------------------------
-    # Radar Chart
-    # -------------------------------
 
     st.markdown("## 🧭 Skill Strength Radar")
 
@@ -339,10 +280,7 @@ if page == "Dashboard":
     st.markdown("---")
 
     st.markdown("---")
-
-    # -------------------------------
     # Market Demand Timeline
-    # -------------------------------
 
     st.markdown("## 📈 Market Demand Timeline")
     st.caption("Job demand trend based on LinkedIn postings (2023–2024)")
@@ -409,10 +347,7 @@ if page == "Dashboard":
         st.info("No skills detected yet.")
 
     st.markdown("---")
-
-    # -------------------------------
     # AI Recommendations
-    # -------------------------------
 
     st.markdown("## 🤖 AI Recommendations")
 
@@ -442,9 +377,6 @@ if page == "Dashboard":
 
         st.write("➡ Learn:", ", ".join(recs))
         st.caption("AI-powered semantic similarity engine")
-# =========================================================
-# VERIFICATION
-# =========================================================
 elif page == "Verification":
 
     import json
@@ -453,9 +385,7 @@ elif page == "Verification":
 
     st.title("🧪 Skill Verification Center")
     st.markdown("AI-Powered Skill Assessment & Certification")
-# -------------------------------
 # Load Quiz Bank
-# -------------------------------
 
     with open("data/skill_quiz.json", "r") as f:
         quiz_bank = json.load(f)
@@ -479,22 +409,14 @@ elif page == "Verification":
 
     if "last_correct" not in st.session_state:
         st.session_state.last_correct = False
-
-
-    # -------------------------------
     # Get All Skills (Dashboard + Quiz)
-    # -------------------------------
 
     dashboard_skills = st.session_state.get("user_skills", [])
 
     all_skills = sorted(
         list(set(list(quiz_bank.keys()) + dashboard_skills))
     )
-
-
-    # -------------------------------
     # Skill & Level Selection
-    # -------------------------------
 
     col1, col2 = st.columns(2)
 
@@ -510,10 +432,6 @@ elif page == "Verification":
             ["easy", "medium", "advanced"]
         )
 
-
-    # -------------------------------
-    # Default Quiz (Fallback)
-    # -------------------------------
 
     default_quiz = {
         "easy": [
@@ -552,10 +470,6 @@ elif page == "Verification":
     }
 
 
-    # -------------------------------
-    # Select Quiz Source
-    # -------------------------------
-
     if skill in quiz_bank:
 
         questions = quiz_bank[skill][level]
@@ -569,11 +483,6 @@ elif page == "Verification":
 
     question = random.choice(questions)
 
-
-    # -------------------------------
-    # Display Question
-    # -------------------------------
-
     st.markdown("---")
 
     st.subheader(f"📘 {skill.title()} ({level.upper()})")
@@ -586,12 +495,6 @@ elif page == "Verification":
     key=f"quiz_{skill}_{level}_{question['q']}"
 )
 
-
-
-
-    # -------------------------------
-    # Submit Button
-    # -------------------------------
 
     if st.button("Submit Answer"):
 
@@ -635,10 +538,6 @@ elif page == "Verification":
                 st.success(f"🏅 {skill.upper()} CERTIFIED!")
 
 
-    # -------------------------------
-    # Progress Analytics
-    # -------------------------------
-
     st.markdown("---")
     st.subheader("📊 Learning Analytics")
 
@@ -668,21 +567,14 @@ elif page == "Verification":
         # Show table
         st.dataframe(progress_df, use_container_width=True)
 
-
-        # -------------------------------
         # Bar Chart
-        # -------------------------------
 
         st.subheader("🎯 Skill Mastery Levels")
 
         chart_df = progress_df.set_index("Skill")["Accuracy %"]
 
         st.bar_chart(chart_df)
-
-
-        # -------------------------------
         # Certification Progress
-        # -------------------------------
 
         st.subheader("🏆 Certification Progress")
 
@@ -694,10 +586,7 @@ elif page == "Verification":
 
             st.progress(int(percent))
 
-
-    # -------------------------------
     # Verified Skills Display
-    # -------------------------------
 
     if st.session_state.verified_skills:
 
@@ -706,11 +595,6 @@ elif page == "Verification":
 
         for s in st.session_state.verified_skills:
             st.write("✔️", s.title())
-
-
-    # -------------------------------
-    # Overall Score
-    # -------------------------------
 
     st.markdown("---")
     st.metric("🏅 Total Score", st.session_state.score)
@@ -727,13 +611,6 @@ elif page == "Verification":
 
         for s in st.session_state.verified_skills:
             st.write("✔️", s.title())
-
-
-
-
-# =========================================================
-# REPORT
-# =========================================================
 
 elif page == "Report":
 
@@ -785,18 +662,13 @@ elif page == "Report":
     )
 
 
-
-# =========================================================
-# ABOUT
-# =========================================================
-
 elif page == "About":
 
     st.header("ℹ️ About")
 
     st.markdown(
         """
-        **SkillSentinel** is an AI-powered system that:
+          SkillSentinel is an AI-powered system that:
 
         - Extracts skills from resumes
         - Analyzes job market trends
